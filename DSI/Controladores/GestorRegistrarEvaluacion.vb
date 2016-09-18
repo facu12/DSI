@@ -5,24 +5,24 @@
     Public Sub imprimirConstancia()
 
     End Sub
-    Public Sub generarConstanciaEvaluacion()
+    Public Function generarConstanciaEvaluacion() As String
+
+    End Function
+    Public Function verificarTerceraEvaluacionYEvInicial() As Boolean
+
+    End Function
+    Public Sub asignarFechaEvaluacion(ByVal fecha As Date)
 
     End Sub
-    Public Sub verificarTerceraEvaluacionYEvInicial()
+    Public Sub asignarDecisionGlobal(ByVal decision As String)
 
     End Sub
-    Public Sub asignarFechaEvaluacion()
+    Public Sub registrarEvaluacion(ByVal evaluacion As Evaluacion)
 
     End Sub
-    Public Sub asignarDecisionGlobal()
+    Public Function verificarEvaluacionIngresada(ByVal evaluacion As Evaluacion) As Boolean
 
-    End Sub
-    Public Sub registrarEvaluacion()
-
-    End Sub
-    Public Sub verificarEvaluacionIngresada()
-
-    End Sub
+    End Function
     Public Function obtenerAspectosAEvaluar() As List(Of AspectoEvaluado)
 
     End Function
