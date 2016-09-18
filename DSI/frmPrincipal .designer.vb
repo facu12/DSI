@@ -23,22 +23,22 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lbl_log = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.lbl_datos_TI = New System.Windows.Forms.Label()
+        Me.dgv_ti = New System.Windows.Forms.DataGridView()
         Me.col_nom_simposio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_nOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_titulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btn_datos_autor = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgv_evaluacion = New System.Windows.Forms.DataGridView()
         Me.col_aspecto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_puntaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_comentario = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lbl_datos_TI = New System.Windows.Forms.Label()
+        Me.btn_datos_autor = New System.Windows.Forms.Button()
         Me.btn_aceptar = New System.Windows.Forms.Button()
         Me.lbl_decision = New System.Windows.Forms.Label()
         Me.cmb_desicion_global = New System.Windows.Forms.ComboBox()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_ti, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_evaluacion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_log
@@ -50,41 +50,14 @@ Partial Class Form1
         Me.lbl_log.TabIndex = 0
         Me.lbl_log.Text = "Nombre apellido logueado"
         '
-        'DataGridView1
+        'dgv_ti
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_nom_simposio, Me.col_nOrden, Me.col_titulo})
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 113)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(413, 108)
-        Me.DataGridView1.TabIndex = 1
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(12, 306)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 57)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Descargar"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_aspecto, Me.col_puntaje, Me.col_comentario})
-        Me.DataGridView2.Location = New System.Drawing.Point(12, 398)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.Size = New System.Drawing.Size(413, 92)
-        Me.DataGridView2.TabIndex = 3
-        '
-        'lbl_datos_TI
-        '
-        Me.lbl_datos_TI.AutoSize = True
-        Me.lbl_datos_TI.Location = New System.Drawing.Point(9, 234)
-        Me.lbl_datos_TI.Name = "lbl_datos_TI"
-        Me.lbl_datos_TI.Size = New System.Drawing.Size(60, 13)
-        Me.lbl_datos_TI.TabIndex = 4
-        Me.lbl_datos_TI.Text = "Datos del ti"
+        Me.dgv_ti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv_ti.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_nom_simposio, Me.col_nOrden, Me.col_titulo})
+        Me.dgv_ti.Location = New System.Drawing.Point(12, 113)
+        Me.dgv_ti.Name = "dgv_ti"
+        Me.dgv_ti.Size = New System.Drawing.Size(413, 108)
+        Me.dgv_ti.TabIndex = 1
         '
         'col_nom_simposio
         '
@@ -101,14 +74,23 @@ Partial Class Form1
         Me.col_titulo.HeaderText = "Titulo"
         Me.col_titulo.Name = "col_titulo"
         '
-        'btn_datos_autor
+        'Button1
         '
-        Me.btn_datos_autor.Location = New System.Drawing.Point(102, 306)
-        Me.btn_datos_autor.Name = "btn_datos_autor"
-        Me.btn_datos_autor.Size = New System.Drawing.Size(83, 57)
-        Me.btn_datos_autor.TabIndex = 5
-        Me.btn_datos_autor.Text = "Datos Autor"
-        Me.btn_datos_autor.UseVisualStyleBackColor = True
+        Me.Button1.Location = New System.Drawing.Point(12, 306)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 57)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Descargar"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'dgv_evaluacion
+        '
+        Me.dgv_evaluacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgv_evaluacion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_aspecto, Me.col_puntaje, Me.col_comentario})
+        Me.dgv_evaluacion.Location = New System.Drawing.Point(12, 398)
+        Me.dgv_evaluacion.Name = "dgv_evaluacion"
+        Me.dgv_evaluacion.Size = New System.Drawing.Size(413, 92)
+        Me.dgv_evaluacion.TabIndex = 3
         '
         'col_aspecto
         '
@@ -124,6 +106,24 @@ Partial Class Form1
         '
         Me.col_comentario.HeaderText = "Comentario"
         Me.col_comentario.Name = "col_comentario"
+        '
+        'lbl_datos_TI
+        '
+        Me.lbl_datos_TI.AutoSize = True
+        Me.lbl_datos_TI.Location = New System.Drawing.Point(9, 234)
+        Me.lbl_datos_TI.Name = "lbl_datos_TI"
+        Me.lbl_datos_TI.Size = New System.Drawing.Size(60, 13)
+        Me.lbl_datos_TI.TabIndex = 4
+        Me.lbl_datos_TI.Text = "Datos del ti"
+        '
+        'btn_datos_autor
+        '
+        Me.btn_datos_autor.Location = New System.Drawing.Point(102, 306)
+        Me.btn_datos_autor.Name = "btn_datos_autor"
+        Me.btn_datos_autor.Size = New System.Drawing.Size(83, 57)
+        Me.btn_datos_autor.TabIndex = 5
+        Me.btn_datos_autor.Text = "Datos Autor"
+        Me.btn_datos_autor.UseVisualStyleBackColor = True
         '
         'btn_aceptar
         '
@@ -161,26 +161,26 @@ Partial Class Form1
         Me.Controls.Add(Me.btn_aceptar)
         Me.Controls.Add(Me.btn_datos_autor)
         Me.Controls.Add(Me.lbl_datos_TI)
-        Me.Controls.Add(Me.DataGridView2)
+        Me.Controls.Add(Me.dgv_evaluacion)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dgv_ti)
         Me.Controls.Add(Me.lbl_log)
         Me.Name = "Form1"
         Me.Text = "Registrar Evaluacion"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_ti, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_evaluacion, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lbl_log As Label
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgv_ti As DataGridView
     Friend WithEvents col_nom_simposio As DataGridViewTextBoxColumn
     Friend WithEvents col_nOrden As DataGridViewTextBoxColumn
     Friend WithEvents col_titulo As DataGridViewTextBoxColumn
     Friend WithEvents Button1 As Button
-    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents dgv_evaluacion As DataGridView
     Friend WithEvents col_aspecto As DataGridViewTextBoxColumn
     Friend WithEvents col_puntaje As DataGridViewTextBoxColumn
     Friend WithEvents col_comentario As DataGridViewTextBoxColumn
