@@ -1,7 +1,7 @@
 ﻿Public Class GestorRegistrarEvaluacion
     Dim seleccionado As TrabajodeInvestigacion
     Dim vigente As EdicionCongreso
-
+    Dim actual As Sesion
     Public Sub finCasoDeUso()
 
     End Sub
@@ -35,7 +35,7 @@
     Public Function obtenerDatosCompletosTI() As String
 
     End Function
-    Public Function obtenerTI() As TrabajodeInvestigacion
+    Public Function obtenerTIs() As List(Of TrabajodeInvestigacion)
 
     End Function
     Public Function obtenerEdicionCongresoVigente() As EdicionCongreso
@@ -45,13 +45,13 @@
         Return Date.Now
     End Function
     Public Function obtenerEvaluadorLogueado() As Usuario
-
+        Return Me.actual.buscarInvestigadorLogueado()
     End Function
 
     Public Sub tomarVisualizacionConstancia(ByVal visualizacion As String)
 
     End Sub
-    Public Sub tomarConfirmacion()
+    Public Sub tomarConfirmacion(ByVal confirma As Boolean)
 
     End Sub
 

@@ -97,6 +97,7 @@
     <Compile Include="iIterador.vb" />
     <Compile Include="Modelo\Investigador.vb" />
     <Compile Include="IteradorTIs.vb" />
+    <Compile Include="Modelo\Sesion.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
