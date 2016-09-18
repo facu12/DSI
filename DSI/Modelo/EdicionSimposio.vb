@@ -1,10 +1,10 @@
 ﻿Public Class EdicionSimposio Implements IAgregado 
     
-    Public cantDiasParaCorrecciones As Integer
-    Public fechaFin As Date
-    Public fechaInicio As Date
-    Public fechaLimitePresTrab As Date
-    Public TrabajoDeInvestigacion[] TIs ;
+    Property cantDiasParaCorrecciones As Integer
+    Property fechaFin As Date
+    Property fechaInicio As Date
+    Property fechaLimitePresTrab As Date
+    Property TrabajoDeInvestigacion[] TIs ;
 
 
     

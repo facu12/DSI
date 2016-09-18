@@ -72,9 +72,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EdicionSimposio.vb" />
-    <Compile Include="Evaluacion.vb" />
-    <Compile Include="Evaluador.vb" />
+    <Compile Include="Modelo\EdicionSimposio.vb" />
+    <Compile Include="Modelo\Evaluacion.vb" />
+    <Compile Include="Modelo\Evaluador.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -85,7 +85,7 @@
     <Compile Include="iAgregado.vb" />
     <Compile Include="iEstadoTI.vb" />
     <Compile Include="iIterador.vb" />
-    <Compile Include="Investigador.vb" />
+    <Compile Include="Modelo\Investigador.vb" />
     <Compile Include="IteradorTIs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -103,8 +103,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Retirado.vb" />
-    <Compile Include="TrabajodeInvestigacion.vb" />
-    <Compile Include="Usuario.vb" />
+    <Compile Include="Modelo\TrabajodeInvestigacion.vb" />
+    <Compile Include="Modelo\Usuario.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
