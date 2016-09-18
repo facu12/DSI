@@ -39,9 +39,32 @@
 
     End Function
     Public Function getSystemDate() As Date
-
+        Return Date.Now
     End Function
     Public Function obtenerEvaluadorLogueado() As Usuario
 
     End Function
+
+    Public Sub tomarVisualizacionConstancia(ByVal visualizacion As String)
+
+    End Sub
+    Public Sub tomarConfirmacion()
+
+    End Sub
+
+    Public Sub tomarDecisionGlobal(ByVal decision As String)
+
+    End Sub
+    Public Sub tomarPuntajeYComentario()
+
+    End Sub
+    Public Sub tomarVisualizarDatosProcAutor()
+
+    End Sub
+    Public Sub tomarTI(ByVal ti As TrabajodeInvestigacion)
+
+    End Sub
+    Public Sub nuevaEvaluacion()
+
+    End Sub
 End Class
