@@ -104,6 +104,8 @@
 
     Private Sub mostrarDatosCompletosTISeleccionado()
 
+
+
     End Sub
 
 
@@ -121,14 +123,26 @@
 
     Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs, ByVal x As Investigador) Handles btn_datos_autor.Click
 
-        Dim aut As Investigador
-        aut = x
+
+        Dim str As String
+        str = ""
+
+        'lista autores del ti seleccionado 
+
+        Dim listita As List(Of Investigador)
+        listita = listarAutores()
+
+        For Each aux As Investigador In listita
+
+            With aux
+                str += (aux.grupoInvestigacion.nombre.ToString + "facultad " + "universidad " + vbCrLf)
+            End With
+
+        Next
 
 
-        With aut
-            MsgBox(" " + .grupoInvestigacion.nombre.ToString, "Aviso", MessageBoxButtons.OKCancel)
+        MsgBox(str, "Aviso", MessageBoxButtons.OKCancel)
 
-        End With
 
     End Sub
 
@@ -179,6 +193,20 @@
     End Sub
 
     Private Sub tomarSeleccionVisualizacionConstancia()
+
+    End Sub
+
+
+
+    Private Sub dgv_evaluacion_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_evaluacion.CellContentDoubleClick
+
+
+
+
+        dgv_evaluacion.CurrentRow.Cells.Item("col_puntaje").Value = "5656"
+
+
+
 
     End Sub
 
