@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="Modelo\AsignacionEvaluador.vb" />
     <Compile Include="Modelo\AspectoEvaluado.vb" />
+    <Compile Include="Modelo\Autor.vb" />
     <Compile Include="Modelo\GrupoInvestigacion.vb" />
     <Compile Include="Modelo\EdicionCongreso.vb" />
     <Compile Include="Modelo\EdicionSimposio.vb" />

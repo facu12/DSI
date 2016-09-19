@@ -40,17 +40,16 @@
     End Sub
 
     Private Sub dgv_ti_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_ti.CellContentClick
-        Dim autores As List(Of Investigador) = dgv_ti.CurrentRow.DataBoundItem.autor
+        Dim autores As List(Of Autor) = dgv_ti.CurrentRow.DataBoundItem.conocerAutores()
         Dim str As String
-        For Each x As Investigador In autores
+        str = ""
+        For Each x As Autor In autores
 
-            str += " " + x.apellido + " " + x.nombre + " " + vbCrLf
+            str += "Numero de orden: " + x.orden.ToString + " " + x.conocerInvestigador().apellido + " " + x.conocerInvestigador().nombre + " " + vbCrLf
 
         Next
 
         lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.DataBoundItem.getPalabraClave() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getestado() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getresumen() + vbCrLf + str
-
-
 
     End Sub
 

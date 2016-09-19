@@ -8,12 +8,27 @@
     Property evaluadorAsignados As List(Of Evaluador)
 
 
-    Property autor As List(Of Investigador)
+    Property autores As List(Of Autor)
 
 
-    Public Function conoceInvestigador()
+    Public Function conocerAutores()
 
-        Return autor
+        Return autores
+    End Function
+    Public Function esDeEvaluadorLogueado(ByVal nombre As String)
+        Dim ban As Boolean
+        ban = False
+        Dim str As String
+        str = ""
+        For Each a As Autor In autores
+            str = a.conocerInvestigador.nombre + a.conocerInvestigador.apellido
+            If (nombre = str) Then
+                ban = True
+            Else
+                str = ""
+            End If
+        Next
+        Return ban
     End Function
 
 End Class
