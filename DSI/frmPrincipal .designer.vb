@@ -27,7 +27,7 @@ Partial Class Form1
         Me.col_nom_simposio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_nOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_titulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btn_descargar = New System.Windows.Forms.Button()
         Me.dgv_evaluacion = New System.Windows.Forms.DataGridView()
         Me.col_aspecto = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_puntaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -74,14 +74,14 @@ Partial Class Form1
         Me.col_titulo.HeaderText = "Titulo"
         Me.col_titulo.Name = "col_titulo"
         '
-        'Button1
+        'btn_descargar
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 306)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 57)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Descargar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btn_descargar.Location = New System.Drawing.Point(12, 306)
+        Me.btn_descargar.Name = "btn_descargar"
+        Me.btn_descargar.Size = New System.Drawing.Size(75, 57)
+        Me.btn_descargar.TabIndex = 2
+        Me.btn_descargar.Text = "Descargar"
+        Me.btn_descargar.UseVisualStyleBackColor = True
         '
         'dgv_evaluacion
         '
@@ -162,7 +162,7 @@ Partial Class Form1
         Me.Controls.Add(Me.btn_datos_autor)
         Me.Controls.Add(Me.lbl_datos_TI)
         Me.Controls.Add(Me.dgv_evaluacion)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btn_descargar)
         Me.Controls.Add(Me.dgv_ti)
         Me.Controls.Add(Me.lbl_log)
         Me.Name = "Form1"
@@ -179,7 +179,7 @@ Partial Class Form1
     Friend WithEvents col_nom_simposio As DataGridViewTextBoxColumn
     Friend WithEvents col_nOrden As DataGridViewTextBoxColumn
     Friend WithEvents col_titulo As DataGridViewTextBoxColumn
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btn_descargar As Button
     Friend WithEvents dgv_evaluacion As DataGridView
     Friend WithEvents col_aspecto As DataGridViewTextBoxColumn
     Friend WithEvents col_puntaje As DataGridViewTextBoxColumn

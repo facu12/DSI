@@ -3,13 +3,16 @@
     Property palabraClave As String
     Property resumen As String
     Property titulo As String
-
+    Property historialEstado As HistorialEstado
     Property estado As Object
     Property evaluadorAsignados As List(Of Evaluador)
-
+    Property asigEva As AsignacionEvaluador
 
     Property autores As List(Of Autor)
 
+    Public Function conocerAsignacionEvaluador()
+        Return asigEva
+    End Function
 
     Public Function conocerAutores()
 
@@ -30,5 +33,14 @@
         Next
         Return ban
     End Function
+
+    Public Function esPendienteDePrimeraEvaluacion()
+        Return historialEstado.esPendienteDePrimeraEvaluacion()
+    End Function
+
+    Public Function esEvaluacionInicial()
+        Return historialEstado.esEvaluacionInicial()
+    End Function
+
 
 End Class

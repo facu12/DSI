@@ -27,7 +27,13 @@
 
     End Function
     Public Function obtenerAspectosAEvaluar() As List(Of AspectoEvaluado)
+        Dim ae As New List(Of AspectoEvaluado)
 
+        For Each ev As Evaluacion In seleccionado.conocerAsignacionEvaluador.conocerEvaluacion()
+            ae += seleccionado.conocerAsignacionEvaluador.conocerEvaluacion().conocerAspectoEvaluado()
+        Next
+
+        Return ae
     End Function
     Public Sub obtenerDatosCadaAutorDelTI()
 
@@ -36,7 +42,7 @@
 
     End Function
     Public Function obtenerTIs() As List(Of TrabajodeInvestigacion)
-        Dim edSimp As New EdicionSimposio
+        Dim edSimp As EdicionSimposio
 
         edSimp.buscarTrabajoDeInvestigacion()
 

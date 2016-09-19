@@ -5,6 +5,7 @@
     Property dni As String
     Property fechaNac As String
     Property us As Usuario
+    Property grupoinv As GrupoInvestigacion
 
 
     Property grupoInvestigacion As GrupoInvestigacion

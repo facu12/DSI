@@ -6,7 +6,8 @@
         cargarTIs()
         MsgBox("Por favor seleccione un Trabajo de Investigacion", MsgBoxResult.Ok)
         btn_datos_autor.Enabled = False
-
+        btn_descargar.Enabled = False
+        dgv_evaluacion.Visible = False
 
     End Sub
 
@@ -50,7 +51,10 @@
         Next
 
         lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.DataBoundItem.getPalabraClave() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getestado() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getresumen() + vbCrLf + str
-
+        btn_descargar.Enabled = True
+        habilitarOpcionVisualizarDatosProcAutor()
+        dgv_evaluacion.Visible = True
+        mostarAspectosAEvaluar()
     End Sub
 
 
@@ -87,16 +91,16 @@
     'dimensiona un Ti a partir de la seleccion (click) en dgv_ti's
     Private Sub tomarSeleccionTI()
 
-        Dim x As TrabajodeInvestigacion
+        'Dim x As TrabajodeInvestigacion
 
-        With x
-            .nroOrden = dgv_ti.CurrentRow.Cells.Item().values
-            .palabraClave = dgv_ti.CurrentRow.Cells.Item().values
-            .resumen = dgv_ti.CurrentRow.Cells.Item().values
-            .titulo = dgv_ti.CurrentRow.Cells.Item().values
+        'With x
+        '    .nroOrden = dgv_ti.CurrentRow.Cells.Item().values
+        '    .palabraClave = dgv_ti.CurrentRow.Cells.Item().values
+        '    .resumen = dgv_ti.CurrentRow.Cells.Item().values
+        '    .titulo = dgv_ti.CurrentRow.Cells.Item().values
 
 
-        End With
+        'End With
 
 
     End Sub
@@ -123,38 +127,48 @@
     End Sub
     ' tomarSeleccionVisualizarDatosProcAutor() mismo metodo que click en el boton  datos en el autor 
 
-    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs, ByVal x As Investigador) Handles btn_datos_autor.Click
+    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs) Handles btn_datos_autor.Click
 
-
-        Dim str As String
-        str = ""
-
-        'lista autores del ti seleccionado 
-
-        Dim listita As List(Of Investigador)
-        listita = listarAutores()
-
-        For Each aux As Investigador In listita
-
-            With aux
-                str += (aux.grupoInvestigacion.nombre.ToString + "facultad " + "universidad " + vbCrLf)
-            End With
-
-        Next
-
-
-        MsgBox(str, "Aviso", MessageBoxButtons.OKCancel)
-
+        mostrarDatosProcAutor()
 
     End Sub
 
 
     Private Sub mostrarDatosProcAutor()
+        Dim str As String
+        str = ""
 
+        'lista autores del ti seleccionado 
+
+        Dim listita As List(Of Autor) = dgv_ti.CurrentRow.DataBoundItem.conocerAutores()
+
+
+        For Each aux As Autor In listita
+
+            With aux.conocerInvestigador
+                str += ("autor: " + .grupoInvestigacion.nombre + " Grupo Investigacion: " + .grupoinv.nombre + " Centro Investigacion: " + .grupoinv.centroinve.nombre + " Facultad: " + .grupoinv.centroinve.facultad.nombre + " Universidad: " + .grupoinv.centroinve.facultad.universidad.nombre + vbCrLf)
+            End With
+
+        Next
+
+
+        MsgBox(str, "Aviso", MessageBoxButtons.OK)
     End Sub
 
 
     Private Sub mostarAspectosAEvaluar()
+        Dim asp As List(Of AspectoEvaluado)
+        asp = gestor.obtenerAspectosAEvaluar()
+
+        dgv_evaluacion.Rows.Clear()
+
+        For Each a As AspectoEvaluado In asp
+
+            With a
+                dgv_evaluacion.Rows.Add(New String() {a.nombre, "", ""})
+
+            End With
+        Next
 
     End Sub
 
@@ -181,7 +195,13 @@
     End Sub
 
     Private Sub solicitarConfirmacionDeEvaluacion()
-
+        Dim resultado As Integer = MsgBox("confirmar registro de evaluacion", MsgBoxStyle.OkCancel, "Confirmacion")
+        If resultado = DialogResult.OK Then
+            'pasa a solicitar visualizacion
+            solicitarFormaVisualizacionConstancia()
+        Else
+            'no deberia hacer nada. volver al form
+        End If
     End Sub
 
 
@@ -203,7 +223,7 @@
     Private Sub dgv_evaluacion_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_evaluacion.CellContentDoubleClick
 
 
-
+        'NO SE COMO SETEAR EL VALOR DEL DGV AL PUNTAJEEE
 
         dgv_evaluacion.CurrentRow.Cells.Item("col_puntaje").Value = "5656"
 
@@ -212,5 +232,7 @@
 
     End Sub
 
-
+    Private Sub btn_aceptar_Click(sender As Object, e As EventArgs) Handles btn_aceptar.Click
+        solicitarConfirmacionDeEvaluacion()
+    End Sub
 End Class
