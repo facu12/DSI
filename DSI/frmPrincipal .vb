@@ -275,7 +275,7 @@
 
             End With
         Next
-        'dgv_evaluacion.Rows.Item(dgv_evaluacion.Rows.Count - 1).Visible = False
+        dgv_evaluacion.Rows.Item(dgv_evaluacion.Rows.Count - 1).ReadOnly = True
     End Sub
 
     Private Sub solicitarIngresoPuntajeYComentario()
