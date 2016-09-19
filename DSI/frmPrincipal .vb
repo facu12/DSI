@@ -1,4 +1,7 @@
 ﻿Public Class Form1
+
+    Dim TI As New TrabajodeInvestigacion
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -51,7 +54,7 @@
         Next
 
         lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.DataBoundItem.getPalabraClave() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getestado() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getresumen() + vbCrLf + str
-        btn_descargar.Enabled = True
+        habilitarBotonDescargarPDF()
         habilitarOpcionVisualizarDatosProcAutor()
         dgv_evaluacion.Visible = True
         mostarAspectosAEvaluar()
@@ -91,16 +94,17 @@
     'dimensiona un Ti a partir de la seleccion (click) en dgv_ti's
     Private Sub tomarSeleccionTI()
 
-        'Dim x As TrabajodeInvestigacion
+        With TI
+            '    .nroOrden = dgv_ti.CurrentRow.Cells.Item().values
+            '    .palabraClave = dgv_ti.CurrentRow.Cells.Item().values
+            '    .resumen = dgv_ti.CurrentRow.Cells.Item().values
+            '    .titulo = dgv_ti.CurrentRow.Cells.Item().values
+            .nroOrden = Convert.ToInt32(dgv_ti.SelectedCells.Item("col_nOrden").Value)
+            .titulo = dgv_ti.SelectedCells.Item("col_titulo").Value.ToString
 
-        'With x
-        '    .nroOrden = dgv_ti.CurrentRow.Cells.Item().values
-        '    .palabraClave = dgv_ti.CurrentRow.Cells.Item().values
-        '    .resumen = dgv_ti.CurrentRow.Cells.Item().values
-        '    .titulo = dgv_ti.CurrentRow.Cells.Item().values
 
 
-        'End With
+        End With
 
 
     End Sub
@@ -116,7 +120,7 @@
 
 
     Private Sub habilitarBotonDescargarPDF()
-
+        btn_descargar.Enabled = True
     End Sub
 
     'habilita btn datos autor
@@ -177,26 +181,44 @@
     End Sub
 
     Private Sub tomarIngresoPuntaje()
-
+        If Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) > 0 And Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) < 5 Then
+            TI.asigEva.conocerEvaluacion().puntajeAsignado = Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value)
+        Else
+            MsgBox("ingrese un puntaje entre 1 y 5 Valor entero", MsgBoxStyle.OkOnly)
+        End If
     End Sub
 
     Private Sub tomarIngresoComentario()
-
+        If dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString <> "" Then
+            TI.asigEva.conocerEvaluacion.comentario = dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString
+        Else
+            MsgBox("ingrese un comentario", MsgBoxStyle.OkOnly)
+        End If
     End Sub
 
-
+    'Carga el combo de decision
     Private Sub solicitarDecisionGlobal()
-
+        cmb_desicion_global.Items.Clear()
+        cmb_desicion_global.Items.Add("Aceptado")
+        cmb_desicion_global.Items.Add("Rechazado c/correcciones")
+        cmb_desicion_global.Items.Add("Rechazado")
+        cmb_desicion_global.SelectedIndex = -1
     End Sub
 
 
     Private Sub tomarSeleccionDecisionGlobal()
-
+        'asigna la decision tomada al TI Hardcodeado
+        TI.asigEva.decisionAceptado = cmb_desicion_global.SelectedItem.value.ToString
     End Sub
 
     Private Sub solicitarConfirmacionDeEvaluacion()
         Dim resultado As Integer = MsgBox("confirmar registro de evaluacion", MsgBoxStyle.OkCancel, "Confirmacion")
         If resultado = DialogResult.OK Then
+            'carga todos los datos al TI Hardcodeado
+            tomarSeleccionDecisionGlobal()
+            tomarIngresoPuntaje()
+            tomarIngresoComentario()
+
             'pasa a solicitar visualizacion
             solicitarFormaVisualizacionConstancia()
         Else
@@ -224,6 +246,7 @@
 
 
         'NO SE COMO SETEAR EL VALOR DEL DGV AL PUNTAJEEE
+
 
         dgv_evaluacion.CurrentRow.Cells.Item("col_puntaje").Value = "5656"
 

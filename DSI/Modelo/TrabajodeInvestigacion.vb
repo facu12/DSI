@@ -7,8 +7,14 @@
     Property estado As Object
     Property evaluadorAsignados As List(Of Evaluador)
     Property asigEva As AsignacionEvaluador
-
     Property autores As List(Of Autor)
+    Property simp As EdicionSimposio
+
+
+
+    Public Function conocerSimposio()
+        Return simp
+    End Function
 
     Public Function conocerAsignacionEvaluador()
         Return asigEva

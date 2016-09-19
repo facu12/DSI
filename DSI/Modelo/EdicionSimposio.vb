@@ -1,6 +1,6 @@
 ﻿Public MustInherit Class EdicionSimposio
     Inherits iAgregado
-
+    Property nombre As String
     Property cantDiasParaCorrecciones As Integer
     Property fechaFin As Date
     Property fechaInicio As Date

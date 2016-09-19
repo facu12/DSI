@@ -1,7 +1,7 @@
 ﻿Public Class Evaluacion
 
     Property comentario As String
-    Property puntajeAsignado As Double
+    Property puntajeAsignado As Integer
     Property aspectoEv As AspectoEvaluado
 
     Public Function conocerAspectoEvaluado()
