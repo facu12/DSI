@@ -3,6 +3,12 @@
     Property descripcion As String
     Property nombre As String
 
+    Public Sub New(amb As String, desc As String, nom As String)
+        ambito = amb
+        descripcion = desc
+        nombre = nom
+    End Sub
+
     Public Function esPendienteDePrimeraEvaluacion()
         Dim ban As Boolean
         ban = False

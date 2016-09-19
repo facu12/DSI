@@ -6,14 +6,15 @@
     Public Sub New(elem As List(Of TrabajodeInvestigacion))
         elementos = elem
         index = 0
+
     End Sub
-    Public Function haTerminado() As Boolean
-        If index > elementos.Count Then
+    Public Overrides Function haTerminado() As Boolean
+        If index >= elementos.Count Then
             Return True
         End If
         Return False
     End Function
-    Public Function actual() As Object
+    Public Overrides Function actual() As Object
         Dim aux As TrabajodeInvestigacion
 
         aux = Nothing
@@ -22,26 +23,34 @@
         End If
         Return aux
     End Function
-    Public Function cumpleFiltro() As Boolean
+    Public Overrides Function cumpleFiltro() As Boolean
         Dim actual As TrabajodeInvestigacion = elementos.Item(index)
-        Dim sesion As Sesion
-        Dim user As New Usuario
+        Dim nombreEv As String = ""
 
-        sesion = Sesion.getSesion(user)
+        ' Tengo que recorrer los autores para comparar el usuario
+        For Each evaluador In actual.evaluadorAsignados
+            If evaluador.investigador.us.nombre = Sesion.getSesion.buscarInvestigadorLogueado.nombre Then
+                nombreEv = evaluador.investigador.nombre
+                nombreEv += evaluador.investigador.apellido
+            End If
+        Next
 
-        If actual.esDeEvaluadorLogueado(sesion.usuario.nombre) Then
+        If actual.esDeEvaluadorLogueado(nombreEv) Then
             'hacer el metodo es de evaluador logueado
             If actual.esEvaluacionInicial() Or actual.esPendienteDePrimeraEvaluacion() Then
                 Return True
             End If
         Else Return False
         End If
+        Return False
     End Function
 
-    Public Sub primero()
+    Public Overrides Sub primero()
         index = 0
     End Sub
-    Public Sub siguiente()
-        index = index + 1
+    Public Overrides Sub siguiente()
+        If Not haTerminado() Then
+            index = index + 1
+        End If
     End Sub
 End Class

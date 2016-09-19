@@ -8,5 +8,11 @@
         Return evaluacion
     End Function
 
+    Public Sub New(decision As String, fechaev As String, fechaasig As String, ev As List(Of Evaluacion))
+        decisionAceptado = decision
+        fechaEvaluacion = fechaev
+        fechaAsignacion = fechaasig
+        evaluacion = ev
+    End Sub
 
 End Class

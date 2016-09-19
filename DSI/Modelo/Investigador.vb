@@ -11,13 +11,13 @@
     Property grupoInvestigacion As GrupoInvestigacion
 
 
-    Public Sub New(a As String, b As String, c As String, d As String, e As String, s As Usuario)
-        nombre = a
-        apellido = b
-        mail = c
-        dni = d
-        fechaNac = e
-        us = s
+    Public Sub New(nom As String, ape As String, mail As String, dni As String, fechanac As String, user As Usuario)
+        nombre = nom
+        apellido = ape
+        mail = mail
+        dni = dni
+        fechanac = fechanac
+        us = user
     End Sub
 
 End Class

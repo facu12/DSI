@@ -3,9 +3,9 @@
     Property orden As Integer
     Property investigador As Investigador
 
-    Public Sub New(Str As String, i As Integer, inv As Investigador)
-        fechaAsignacion = Str
-        orden = i
+    Public Sub New(fechaasig As String, ord As Integer, inv As Investigador)
+        fechaAsignacion = fechaasig
+        orden = ord
         investigador = inv
     End Sub
 

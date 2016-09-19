@@ -10,7 +10,20 @@
     Property autores As List(Of Autor)
     Property simp As EdicionSimposio
 
-
+    Public Sub New(ord As Integer, clave As String, resum As String, tit As String, hist As HistorialEstado,
+                   est As Estado, evasig As List(Of Evaluador), asigev As AsignacionEvaluador,
+                   aut As List(Of Autor), sim As EdicionSimposio)
+        nroOrden = ord
+        palabraClave = clave
+        resumen = resum
+        titulo = tit
+        historialEstado = hist
+        estado = est
+        evaluadorAsignados = evasig
+        asigEva = asigev
+        autores = aut
+        simp = sim
+    End Sub
 
     Public Function conocerSimposio()
         Return simp
@@ -25,19 +38,16 @@
         Return autores
     End Function
     Public Function esDeEvaluadorLogueado(ByVal nombre As String)
-        Dim ban As Boolean
-        ban = False
         Dim str As String
-        str = ""
-        For Each a As Autor In autores
-            str = a.conocerInvestigador.nombre + a.conocerInvestigador.apellido
+        For Each ev As Evaluador In evaluadorAsignados
+            str = ev.investigador.nombre + ev.investigador.apellido
             If (nombre = str) Then
-                ban = True
+                Return True
             Else
                 str = ""
             End If
         Next
-        Return ban
+        Return False
     End Function
 
     Public Function esPendienteDePrimeraEvaluacion()

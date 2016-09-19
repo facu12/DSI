@@ -1,12 +1,98 @@
 ﻿Public Class Form1
 
-    Dim TI As New TrabajodeInvestigacion
+    Dim ti As TrabajodeInvestigacion
+
+    Public Sub setTrabajodeInvestigacion(trab As TrabajodeInvestigacion)
+        ti = trab
+    End Sub
+
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim user1, user2, user3, user4, user5, user6 As New Usuario
 
+        ' creo usuarios
+        user1.nombre = "fmallia"
+        user1.contrasena = "1234"
+
+        user2.nombre = "jbere"
+        user2.contrasena = "1234"
+
+        user3.nombre = "jdan"
+        user3.contrasena = "1234"
+
+        user3.nombre = "ev1"
+        user3.contrasena = "1234"
+
+        user4.nombre = "ev2"
+        user4.contrasena = "1234"
+
+        user5.nombre = "ev3"
+        user5.contrasena = "1234"
+
+        'creo la sesion que es solo del usuario 3 que es un evaluador
+        Sesion.getSesion.setUsuario(user3)
+
+        'crear universidad
+        Dim univ As New Universidad("UTN")
+        'crear facultad
+        Dim facu As New Facultad("Ing en Sitemas", univ)
+        'crear centro de investigacion
+        Dim centro As New CentroInvestigacion("Laboratorio de ciencias", "lab 4", facu)
+        'crear grupo investigacion
+        Dim grupo As New GrupoInvestigacion("Cientifico de la NASA", centro)
+        'crear investigador
+        Dim invest1 As New Investigador("Facu", "Mallia", "fmallia@gmail.com", "25988766", "23/12/1980", user1)
+        Dim invest2 As New Investigador("Juan", "Bere", "jbere@gmail.com", "36789789", "13/12/1990", user2)
+        Dim invest3 As New Investigador("Juli", "Dangelis", "jdange@gmail.com", "38999000", "17/12/1990", user3)
+
+        Dim invest4 As New Investigador("evaluador ", "1", "ev1@gmail.com", "12488766", "23/01/1980", user1)
+        Dim invest5 As New Investigador("evaluador ", "2", "ev2@gmail.com", "36712389", "13/03/1994", user2)
+        Dim invest6 As New Investigador("evaluador ", "3", "ev3@gmail.com", "38119000", "12/08/1995", user3)
+        ' creo los autores
+        Dim autor1 As New Autor(1, invest1)
+        Dim autor2 As New Autor(2, invest2)
+        Dim autor3 As New Autor(3, invest3)
+        'creo evaluadores
+        Dim ev1 As New Evaluador("25/10/2016", 1, invest4)
+        Dim ev2 As New Evaluador("25/10/2016", 2, invest5)
+        Dim ev3 As New Evaluador("25/10/2016", 3, invest6)
+        'creo estado
+        Dim estado As New Estado("ti", "el ti se encuentra pendiente de primera evaluacion", "PendienteDePrimeraEvaluacion")
+        'creo historial estados
+        Dim hist As New HistorialEstado("17/10/2016", estado)
+        'creo lista de evaluadores
+        Dim listaevaluador As New List(Of Evaluador)
+        listaevaluador.Add(ev1)
+        listaevaluador.Add(ev2)
+        listaevaluador.Add(ev3)
+        'creo aspecto evaluado
+        Dim aspecto As New AspectoEvaluado("Teorico", "se evalua la parte teorica")
+        'creo evaluacion
+        Dim evaluacion As New Evaluacion("Comentario 1", 7, aspecto)
+        'creo lista de evaluacion
+        Dim listaevaluacion As New List(Of Evaluacion)
+        listaevaluacion.Add(evaluacion)
+        'creo asignacion de evaluador
+        Dim asigevaluador As New AsignacionEvaluador("aprobado", "25/10/2016", "17/09/2016", listaevaluacion)
+        'creo lista de autores
+        Dim listaAutores As New List(Of Autor)
+        listaAutores.Add(autor1)
+        listaAutores.Add(autor2)
+        listaAutores.Add(autor3)
+        'creo edicion simposio
+        Dim edicionsimposio As New EdicionSimposio("Edicion 2016", 1, "30/10/2016", "01/10/2016", "30/10/2016")
+        ' creo los tis
+        Dim ti1 As New TrabajodeInvestigacion(1, "Clave 1", "Resumen 1", "Titulo 1", hist, estado, listaevaluador, asigevaluador, listaAutores, edicionsimposio)
+        Dim ti2 As New TrabajodeInvestigacion(2, "Clave 2", "Resumen 2", "Titulo 2", hist, estado, listaevaluador, asigevaluador, listaAutores, edicionsimposio)
+        Dim ti3 As New TrabajodeInvestigacion(3, "Clave 3", "Resumen 3", "Titulo 3", hist, estado, listaevaluador, asigevaluador, listaAutores, edicionsimposio)
+        'creo la lista de tis
+        Dim listaTis As New List(Of TrabajodeInvestigacion)
+        listaTis.Add(ti1)
+        listaTis.Add(ti2)
+        listaTis.Add(ti3)
 
         mostrarDatosEvaluadorLogueado()
-        cargarTIs()
+        cargarTIs(edicionsimposio, listaTis)
         MsgBox("Por favor seleccione un Trabajo de Investigacion", MsgBoxResult.Ok)
         btn_datos_autor.Enabled = False
         btn_descargar.Enabled = False
@@ -27,13 +113,12 @@
 
     End Sub
 
-    Private Sub cargarTIs()
-        Dim tis As List(Of TrabajodeInvestigacion)
-        tis = gestor.obtenerTIs()
+    Private Sub cargarTIs(edSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion))
+        TIs = gestor.obtenerTIs(edSimp, TIs)
 
         dgv_ti.Rows.Clear()
 
-        For Each a As TrabajodeInvestigacion In tis
+        For Each a As TrabajodeInvestigacion In TIs
 
             With a
                 dgv_ti.Rows.Add(New String() {"Proyecto de DSI", a.nroOrden.ToString, a.titulo.ToString})
@@ -72,10 +157,10 @@
 
     'crea un string con todos los ti's devueltos por el gestor 
 
-    Private Function mostrarCabeceraTrabajosdeDeinvestigacion()
+    Private Function mostrarCabeceraTrabajosdeDeinvestigacion(edSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion))
 
         Dim listTIS As List(Of TrabajodeInvestigacion)
-        listTIS = gestor.obtenerTIs()
+        listTIS = gestor.obtenerTIs(edSimp, TIs)
         Dim str As String
         str = ""
 

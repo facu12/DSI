@@ -1,21 +1,27 @@
-﻿Public MustInherit Class EdicionSimposio
+﻿Public Class EdicionSimposio
     Inherits iAgregado
     Property nombre As String
     Property cantDiasParaCorrecciones As Integer
     Property fechaFin As Date
     Property fechaInicio As Date
     Property fechaLimitePresTrab As Date
-    Property TIs As List(Of TrabajodeInvestigacion)
+    ' Property TIs As List(Of TrabajodeInvestigacion)
+
+    Public Sub New(nom As String, cant As Integer, fechafin As Date, fechainicio As Date, fechalim As Date)
+        nombre = nom
+        cantDiasParaCorrecciones = cant
+        fechafin = fechafin
+        fechainicio = fechainicio
+        fechaLimitePresTrab = fechalim
+    End Sub
 
 
-
-
-    Public Function buscarTrabajoDeInvestigacion() As List(Of TrabajodeInvestigacion)
+    Public Function buscarTrabajoDeInvestigacion(TIs As List(Of TrabajodeInvestigacion)) As List(Of TrabajodeInvestigacion)
 
         Dim itera As iIterador = crearIterador(TIs)
         Dim aux As New List(Of TrabajodeInvestigacion)
         itera.primero()
-        While (itera.haTerminado())
+        While (Not itera.haTerminado())
             Dim ti As Object = itera.actual()
 
             If ti IsNot Nothing Then
