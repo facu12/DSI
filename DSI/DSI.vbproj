@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Modelo\AsignacionEvaluador.vb" />
     <Compile Include="Modelo\AspectoEvaluado.vb" />
+    <Compile Include="Modelo\GrupoInvestigacion.vb" />
     <Compile Include="Modelo\EdicionCongreso.vb" />
     <Compile Include="Modelo\EdicionSimposio.vb" />
     <Compile Include="Modelo\Evaluacion.vb" />
@@ -97,6 +98,7 @@
     <Compile Include="iIterador.vb" />
     <Compile Include="Modelo\Investigador.vb" />
     <Compile Include="IteradorTIs.vb" />
+    <Compile Include="Modelo\Sesion.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

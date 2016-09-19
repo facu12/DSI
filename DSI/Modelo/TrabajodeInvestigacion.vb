@@ -6,4 +6,14 @@
 
     Property estado As Object
     Property evaluadorAsignados As List(Of Evaluador)
+
+    Property autor As Investigador
+
+
+    Public Function conoceInvestigador()
+
+
+        Return autor
+    End Function
+
 End Class

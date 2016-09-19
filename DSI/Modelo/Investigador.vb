@@ -6,6 +6,10 @@
     Property fechaNac As String
     Property us As Usuario
 
+
+    Property grupoInvestigacion As GrupoInvestigacion
+
+
     Public Sub New(a As String, b As String, c As String, d As String, e As String, s As Usuario)
         nombre = a
         apellido = b
