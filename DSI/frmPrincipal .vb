@@ -48,6 +48,16 @@
         Dim invest4 As New Investigador("evaluador ", "1", "ev1@gmail.com", "12488766", "23/01/1980", user1)
         Dim invest5 As New Investigador("evaluador ", "2", "ev2@gmail.com", "36712389", "13/03/1994", user2)
         Dim invest6 As New Investigador("evaluador ", "3", "ev3@gmail.com", "38119000", "12/08/1995", user3)
+
+        'crear lista con todos los investigadores
+        Dim listaInvestigadores As New List(Of Investigador)
+        listaInvestigadores.Add(invest1)
+        listaInvestigadores.Add(invest2)
+        listaInvestigadores.Add(invest3)
+        listaInvestigadores.Add(invest4)
+        listaInvestigadores.Add(invest5)
+        listaInvestigadores.Add(invest6)
+
         ' creo los autores
         Dim autor1 As New Autor(1, invest1)
         Dim autor2 As New Autor(2, invest2)
@@ -91,7 +101,7 @@
         listaTis.Add(ti2)
         listaTis.Add(ti3)
 
-        mostrarDatosEvaluadorLogueado()
+        mostrarDatosEvaluadorLogueado(listaInvestigadores)
         cargarTIs(edicionsimposio, listaTis)
         MsgBox("Por favor seleccione un Trabajo de Investigacion", MsgBoxResult.Ok)
         btn_datos_autor.Enabled = False
@@ -105,12 +115,10 @@
 
 
     'busca del gestor los datos del evaluador logueado 
-    Private Sub mostrarDatosEvaluadorLogueado()
-        Dim us As Usuario
-        us = gestor.obtenerEvaluadorLogueado()
-
-        lbl_log.Text = us.nombre
-
+    Private Sub mostrarDatosEvaluadorLogueado(investigadores As List(Of Investigador))
+        Dim ev As Investigador
+        ev = gestor.obtenerEvaluadorLogueado(investigadores)
+        lbl_log.Text = ev.nombre + " " + ev.apellido
     End Sub
 
     Private Sub cargarTIs(edSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion))

@@ -50,10 +50,16 @@
     Public Function getSystemDate() As Date
         Return Date.Now
     End Function
-    Public Function obtenerEvaluadorLogueado() As Usuario
+    Public Function obtenerEvaluadorLogueado(investigadores As List(Of Investigador)) As Investigador
+        Dim evaluador As Investigador = Nothing
 
-
-        Return Sesion.getSesion.buscarInvestigadorLogueado
+        'recorro evaluadores para encontrar el usuario logueado
+        For Each ev In investigadores
+            If ev.us.nombre = Sesion.getSesion.buscarInvestigadorLogueado().nombre Then
+                Return ev
+            End If
+        Next
+        Return evaluador
     End Function
 
     Public Sub tomarVisualizacionConstancia(ByVal visualizacion As String)

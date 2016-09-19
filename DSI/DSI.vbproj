@@ -72,7 +72,19 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Autores.Designer.vb">
+      <DependentUpon>Autores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Autores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controladores\GestorRegistrarEvaluacion.vb" />
+    <Compile Include="Datos TI.Designer.vb">
+      <DependentUpon>Datos TI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Datos TI.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmInicio.Designer.vb">
       <DependentUpon>frmInicio.vb</DependentUpon>
     </Compile>
@@ -96,12 +108,12 @@
     <Compile Include="Modelo\EdicionSimposio.vb" />
     <Compile Include="Modelo\Evaluacion.vb" />
     <Compile Include="Modelo\Evaluador.vb" />
-    <Compile Include="iAgregado.vb" />
-    <Compile Include="iEstadoTI.vb" />
-    <Compile Include="iIterador.vb" />
+    <Compile Include="Iterador\iAgregado.vb" />
+    <Compile Include="Iterador\iEstadoTI.vb" />
+    <Compile Include="Iterador\iIterador.vb" />
     <Compile Include="Modelo\HistorialEstado.vb" />
     <Compile Include="Modelo\Investigador.vb" />
-    <Compile Include="IteradorTIs.vb" />
+    <Compile Include="Iterador\IteradorTIs.vb" />
     <Compile Include="Modelo\Sesion.vb" />
     <Compile Include="Modelo\Universidad.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -119,11 +131,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Retirado.vb" />
     <Compile Include="Modelo\TrabajodeInvestigacion.vb" />
     <Compile Include="Modelo\Usuario.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Autores.resx">
+      <DependentUpon>Autores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Datos TI.resx">
+      <DependentUpon>Datos TI.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmInicio.resx">
       <DependentUpon>frmInicio.vb</DependentUpon>
     </EmbeddedResource>
@@ -149,7 +166,9 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Imagen\imgUsuario.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
