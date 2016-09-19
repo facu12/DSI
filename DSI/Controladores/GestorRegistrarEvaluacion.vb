@@ -36,6 +36,9 @@
 
     End Function
     Public Function obtenerTIs() As List(Of TrabajodeInvestigacion)
+        Dim edSimp As New EdicionSimposio
+
+        edSimp.buscarTrabajoDeInvestigacion()
 
     End Function
     Public Function obtenerEdicionCongresoVigente() As EdicionCongreso

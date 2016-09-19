@@ -73,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controladores\GestorRegistrarEvaluacion.vb" />
+    <Compile Include="frmInicio.Designer.vb">
+      <DependentUpon>frmInicio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmInicio.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmPrincipal .designer.vb">
       <DependentUpon>frmPrincipal .vb</DependentUpon>
     </Compile>
@@ -86,13 +92,6 @@
     <Compile Include="Modelo\EdicionSimposio.vb" />
     <Compile Include="Modelo\Evaluacion.vb" />
     <Compile Include="Modelo\Evaluador.vb" />
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="iAgregado.vb" />
     <Compile Include="iEstadoTI.vb" />
     <Compile Include="iIterador.vb" />
@@ -119,8 +118,8 @@
     <Compile Include="Modelo\Usuario.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <EmbeddedResource Include="frmInicio.resx">
+      <DependentUpon>frmInicio.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal .resx">
       <DependentUpon>frmPrincipal .vb</DependentUpon>

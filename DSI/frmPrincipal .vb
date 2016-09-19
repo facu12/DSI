@@ -3,7 +3,8 @@
 
 
         mostrarDatosEvaluadorLogueado()
-
+        cargarTIs()
+        MsgBox("Por favor seleccione un Trabajo de Investigacion", MsgBoxResult.Ok)
         btn_datos_autor.Enabled = False
 
 
@@ -18,7 +19,7 @@
         Dim us As Usuario
         us = gestor.obtenerEvaluadorLogueado()
 
-        lbl_log.Text = us.ToString
+        lbl_log.Text = us.nombre
 
     End Sub
 
@@ -28,7 +29,6 @@
 
         dgv_ti.Rows.Clear()
 
-
         For Each a As TrabajodeInvestigacion In tis
 
             With a
@@ -37,15 +37,18 @@
             End With
         Next
 
-
-
-
     End Sub
 
     Private Sub dgv_ti_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_ti.CellContentClick
+        Dim autores As List(Of Investigador) = dgv_ti.CurrentRow.DataBoundItem.autor
+        Dim str As String
+        For Each x As Investigador In autores
 
-        lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.Cells.Item("col_ti").Value
+            str += " " + x.apellido + " " + x.nombre + " " + vbCrLf
 
+        Next
+
+        lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.DataBoundItem.getPalabraClave() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getestado() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getresumen() + vbCrLf + str
 
 
 
