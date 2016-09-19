@@ -161,7 +161,7 @@ Partial Class Form1
         Me.cmb_desicion_global.FormattingEnabled = True
         Me.cmb_desicion_global.Location = New System.Drawing.Point(30, 629)
         Me.cmb_desicion_global.Name = "cmb_desicion_global"
-        Me.cmb_desicion_global.Size = New System.Drawing.Size(121, 21)
+        Me.cmb_desicion_global.Size = New System.Drawing.Size(143, 21)
         Me.cmb_desicion_global.TabIndex = 9
         '
         'PictureBox1
