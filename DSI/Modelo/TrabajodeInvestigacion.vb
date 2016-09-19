@@ -37,7 +37,7 @@
 
         Return autores
     End Function
-    Public Function esDeEvaluadorLogueado(ByVal nombre As String)
+    Public Function esDeEvaluadorLogueado(ByVal nombre As String) As Boolean
         Dim str As String
         For Each ev As Evaluador In evaluadorAsignados
             str = ev.investigador.nombre + ev.investigador.apellido

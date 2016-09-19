@@ -38,7 +38,8 @@
     Public Sub obtenerDatosCadaAutorDelTI()
 
     End Sub
-    Public Function obtenerDatosCompletosTI() As String
+    Public Function obtenerDatosCompletosTI() As TrabajodeInvestigacion
+
 
     End Function
     Public Function obtenerTIs(EdSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion)) As List(Of TrabajodeInvestigacion)

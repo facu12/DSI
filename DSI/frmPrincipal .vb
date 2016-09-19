@@ -107,6 +107,7 @@
         btn_datos_autor.Enabled = False
         btn_descargar.Enabled = False
         dgv_evaluacion.Visible = False
+        btn_datos_autor.Enabled = False
 
     End Sub
 
@@ -122,35 +123,40 @@
     End Sub
 
     Private Sub cargarTIs(edSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion))
-        TIs = gestor.obtenerTIs(edSimp, TIs)
+        Dim aux As List(Of TrabajodeInvestigacion) = gestor.obtenerTIs(edSimp, TIs)
 
         dgv_ti.Rows.Clear()
+        dgv_ti.AutoGenerateColumns = False
+        dgv_ti.DataSource = aux 'asigno el datasource a la lista'
+        dgv_ti.Columns.Item(0).DataPropertyName = "simp.nombre" 'no sirve este, lo arregle con el for de abajo'
+        dgv_ti.Columns.Item(1).DataPropertyName = "nroOrden" 'asigno la columna Nro Orden al atributo nroOrden'
+        dgv_ti.Columns.Item(2).DataPropertyName = "titulo" 'mismo que arriba'
 
-        For Each a As TrabajodeInvestigacion In TIs
-
-            With a
-                dgv_ti.Rows.Add(New String() {"Proyecto de DSI", a.nroOrden.ToString, a.titulo.ToString})
-
-            End With
+        For index = 0 To (dgv_ti.Rows.Count - 1)
+            dgv_ti.Rows.Item(index).Cells(0).Value = "Proyecto de DSI"
         Next
+
+
+
+
 
     End Sub
 
     Private Sub dgv_ti_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_ti.CellContentClick
-        Dim autores As List(Of Autor) = dgv_ti.CurrentRow.DataBoundItem.conocerAutores()
+        Dim aux As TrabajodeInvestigacion = TryCast(dgv_ti.CurrentRow.DataBoundItem, TrabajodeInvestigacion)
         Dim str As String
         str = ""
-        For Each x As Autor In autores
+        Me.llenarGridAutores(aux)
 
-            str += "Numero de orden: " + x.orden.ToString + " " + x.conocerInvestigador().apellido + " " + x.conocerInvestigador().nombre + " " + vbCrLf
-
-        Next
-
-        lbl_datos_TI.Text = " " + dgv_ti.CurrentRow.DataBoundItem.getPalabraClave() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getestado() + vbCrLf + dgv_ti.CurrentRow.DataBoundItem.getresumen() + vbCrLf + str
+        lbl_datos_TI.Text = "Palabras clave: " + aux.palabraClave + vbCrLf + "Estado: " + aux.historialEstado.estado.nombre + vbCrLf + "Resumen: " + aux.resumen + vbCrLf '+ str'
         habilitarBotonDescargarPDF()
         habilitarOpcionVisualizarDatosProcAutor()
         dgv_evaluacion.Visible = True
         mostarAspectosAEvaluar()
+
+
+
+
     End Sub
 
 
@@ -224,7 +230,7 @@
     End Sub
     ' tomarSeleccionVisualizarDatosProcAutor() mismo metodo que click en el boton  datos en el autor 
 
-    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs) Handles btn_datos_autor.Click
+    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs)
 
         mostrarDatosProcAutor()
 
@@ -243,7 +249,7 @@
         For Each aux As Autor In listita
 
             With aux.conocerInvestigador
-                str += ("autor: " + .grupoInvestigacion.nombre + " Grupo Investigacion: " + .grupoinv.nombre + " Centro Investigacion: " + .grupoinv.centroinve.nombre + " Facultad: " + .grupoinv.centroinve.facultad.nombre + " Universidad: " + .grupoinv.centroinve.facultad.universidad.nombre + vbCrLf)
+                str += ("Autor: " + .grupoInvestigacion.nombre + " Grupo Investigacion: " + .grupoinv.nombre + " Centro Investigacion: " + .grupoinv.centroInve.nombre + " Facultad: " + .grupoinv.centroInve.facultad.nombre + " Universidad: " + .grupoinv.centroInve.facultad.univ.nombre + vbCrLf)
             End With
 
         Next
@@ -275,7 +281,7 @@
 
     Private Sub tomarIngresoPuntaje()
         If Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) > 0 And Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) < 5 Then
-            TI.asigEva.conocerEvaluacion().puntajeAsignado = Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value)
+            ti.asigEva.conocerEvaluacion().puntajeAsignado = Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value)
         Else
             MsgBox("ingrese un puntaje entre 1 y 5 Valor entero", MsgBoxStyle.OkOnly)
         End If
@@ -283,7 +289,7 @@
 
     Private Sub tomarIngresoComentario()
         If dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString <> "" Then
-            TI.asigEva.conocerEvaluacion.comentario = dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString
+            ti.asigEva.conocerEvaluacion.comentario = dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString
         Else
             MsgBox("ingrese un comentario", MsgBoxStyle.OkOnly)
         End If
@@ -301,7 +307,7 @@
 
     Private Sub tomarSeleccionDecisionGlobal()
         'asigna la decision tomada al TI Hardcodeado
-        TI.asigEva.decisionAceptado = cmb_desicion_global.SelectedItem.value.ToString
+        ti.asigEva.decisionAceptado = cmb_desicion_global.SelectedItem.value.ToString
     End Sub
 
     Private Sub solicitarConfirmacionDeEvaluacion()
@@ -350,5 +356,37 @@
 
     Private Sub btn_aceptar_Click(sender As Object, e As EventArgs) Handles btn_aceptar.Click
         solicitarConfirmacionDeEvaluacion()
+    End Sub
+
+    Private Sub dgv_autores_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_autores.CellContentClick
+
+        btn_datos_autor.Enabled = True
+
+
+
+
+    End Sub
+
+
+    Private Sub llenarGridAutores(ByVal ti As TrabajodeInvestigacion)
+        Dim aux As TrabajodeInvestigacion
+        aux = ti
+
+
+        For Each x As Autor In aux.conocerAutores()
+
+            dgv_autores.Rows.Add(New String() {x.orden.ToString, x.conocerInvestigador.nombre.ToString, x.investigador.apellido.ToString})
+
+        Next
+
+
+    End Sub
+
+    Private Sub btn_datos_autor_Click_1(sender As Object, e As EventArgs) Handles btn_datos_autor.Click
+        mostrarDatosProcAutor()
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
     End Sub
 End Class

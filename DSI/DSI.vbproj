@@ -79,12 +79,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controladores\GestorRegistrarEvaluacion.vb" />
-    <Compile Include="Datos TI.Designer.vb">
-      <DependentUpon>Datos TI.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Datos TI.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmInicio.Designer.vb">
       <DependentUpon>frmInicio.vb</DependentUpon>
     </Compile>
@@ -137,9 +131,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Autores.resx">
       <DependentUpon>Autores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Datos TI.resx">
-      <DependentUpon>Datos TI.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmInicio.resx">
       <DependentUpon>frmInicio.vb</DependentUpon>
