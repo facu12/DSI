@@ -111,6 +111,8 @@
         dgv_evaluacion.Visible = False
         btn_datos_autor.Enabled = False
 
+        solicitarDecisionGlobal()
+
     End Sub
 
 
