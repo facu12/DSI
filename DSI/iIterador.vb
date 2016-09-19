@@ -1,10 +1,9 @@
 ﻿Public Class iIterador
-    Public actual() As Object
-    Public cumpleFiltro() As Boolean
-    Public haTerminado() As Boolean
-    Public Sub primero()
-    End Sub
-    Public Sub siguiente()
-
-    End Sub
+    Public MustInherit Class iIterador
+        Public MustOverride Function actual() As Object
+        Public MustOverride Function cumpleFiltro() As Boolean
+        Public MustOverride Function haTerminado() As Boolean
+        Public MustOverride Sub primero()
+        Public MustOverride Sub siguiente()
+    End Class
 End Class
