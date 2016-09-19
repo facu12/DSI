@@ -1,5 +1,5 @@
 ﻿Public Class GestorRegistrarEvaluacion
-    Dim seleccionado As TrabajodeInvestigacion
+    Property seleccionado As TrabajodeInvestigacion
     Dim vigente As EdicionCongreso
 
     Public Sub finCasoDeUso()
@@ -30,7 +30,7 @@
         Dim ae As New List(Of AspectoEvaluado)
 
         For Each ev As Evaluacion In seleccionado.conocerAsignacionEvaluador.conocerEvaluacion()
-            ae += seleccionado.conocerAsignacionEvaluador.conocerEvaluacion().conocerAspectoEvaluado()
+            ae.Add(ev.aspectoEv)
         Next
 
         Return ae

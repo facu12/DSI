@@ -30,15 +30,15 @@ Partial Class Form1
         Me.col_titulo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btn_descargar = New System.Windows.Forms.Button()
         Me.dgv_evaluacion = New System.Windows.Forms.DataGridView()
+        Me.col_aspecto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_puntaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.col_comentario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lbl_datos_TI = New System.Windows.Forms.Label()
         Me.btn_aceptar = New System.Windows.Forms.Button()
         Me.lbl_decision = New System.Windows.Forms.Label()
         Me.cmb_desicion_global = New System.Windows.Forms.ComboBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.col_aspecto = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_puntaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.col_comentario = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgv_autores = New System.Windows.Forms.DataGridView()
         Me.col_nroOrden = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.col_nombre = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -99,9 +99,9 @@ Partial Class Form1
         '
         Me.btn_descargar.Location = New System.Drawing.Point(99, 408)
         Me.btn_descargar.Name = "btn_descargar"
-        Me.btn_descargar.Size = New System.Drawing.Size(69, 22)
+        Me.btn_descargar.Size = New System.Drawing.Size(88, 22)
         Me.btn_descargar.TabIndex = 2
-        Me.btn_descargar.Text = "Descargar"
+        Me.btn_descargar.Text = "Descargar PDF"
         Me.btn_descargar.UseVisualStyleBackColor = True
         '
         'dgv_evaluacion
@@ -112,6 +112,22 @@ Partial Class Form1
         Me.dgv_evaluacion.Name = "dgv_evaluacion"
         Me.dgv_evaluacion.Size = New System.Drawing.Size(413, 92)
         Me.dgv_evaluacion.TabIndex = 3
+        '
+        'col_aspecto
+        '
+        Me.col_aspecto.HeaderText = "Aspecto"
+        Me.col_aspecto.Name = "col_aspecto"
+        Me.col_aspecto.ReadOnly = True
+        '
+        'col_puntaje
+        '
+        Me.col_puntaje.HeaderText = "Puntaje"
+        Me.col_puntaje.Name = "col_puntaje"
+        '
+        'col_comentario
+        '
+        Me.col_comentario.HeaderText = "Comentario"
+        Me.col_comentario.Name = "col_comentario"
         '
         'lbl_datos_TI
         '
@@ -152,7 +168,7 @@ Partial Class Form1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
         Me.PictureBox1.Location = New System.Drawing.Point(399, 10)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(34, 38)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -163,29 +179,13 @@ Partial Class Form1
         '
         Me.GroupBox1.Controls.Add(Me.dgv_ti)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 56)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
         Me.GroupBox1.Size = New System.Drawing.Size(494, 176)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Lista de Trabajos de Investigacion"
-        '
-        'col_aspecto
-        '
-        Me.col_aspecto.HeaderText = "Aspecto"
-        Me.col_aspecto.Name = "col_aspecto"
-        Me.col_aspecto.ReadOnly = True
-        '
-        'col_puntaje
-        '
-        Me.col_puntaje.HeaderText = "Puntaje"
-        Me.col_puntaje.Name = "col_puntaje"
-        '
-        'col_comentario
-        '
-        Me.col_comentario.HeaderText = "Comentario"
-        Me.col_comentario.Name = "col_comentario"
         '
         'dgv_autores
         '
@@ -193,24 +193,28 @@ Partial Class Form1
         Me.dgv_autores.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col_nroOrden, Me.col_nombre, Me.col_apellido})
         Me.dgv_autores.Location = New System.Drawing.Point(30, 302)
         Me.dgv_autores.Name = "dgv_autores"
+        Me.dgv_autores.ReadOnly = True
         Me.dgv_autores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgv_autores.Size = New System.Drawing.Size(387, 98)
+        Me.dgv_autores.Size = New System.Drawing.Size(413, 98)
         Me.dgv_autores.TabIndex = 12
         '
         'col_nroOrden
         '
         Me.col_nroOrden.HeaderText = "N°Orden"
         Me.col_nroOrden.Name = "col_nroOrden"
+        Me.col_nroOrden.ReadOnly = True
         '
         'col_nombre
         '
         Me.col_nombre.HeaderText = "Nombre"
         Me.col_nombre.Name = "col_nombre"
+        Me.col_nombre.ReadOnly = True
         '
         'col_apellido
         '
         Me.col_apellido.HeaderText = "Apellido"
         Me.col_apellido.Name = "col_apellido"
+        Me.col_apellido.ReadOnly = True
         '
         'btn_datos_autor
         '

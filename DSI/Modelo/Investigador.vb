@@ -8,8 +8,6 @@
     Property grupoinv As GrupoInvestigacion
 
 
-    Property grupoInvestigacion As GrupoInvestigacion
-
 
     Public Sub New(nom As String, ape As String, mail As String, dni As String, fechanac As String, user As Usuario)
         nombre = nom

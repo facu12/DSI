@@ -44,7 +44,9 @@
         Dim invest1 As New Investigador("Facu", "Mallia", "fmallia@gmail.com", "25988766", "23/12/1980", user1)
         Dim invest2 As New Investigador("Juan", "Bere", "jbere@gmail.com", "36789789", "13/12/1990", user2)
         Dim invest3 As New Investigador("Juli", "Dangelis", "jdange@gmail.com", "38999000", "17/12/1990", user3)
-
+        invest1.grupoinv = grupo
+        invest2.grupoinv = grupo
+        invest3.grupoinv = grupo
         Dim invest4 As New Investigador("evaluador ", "1", "ev1@gmail.com", "12488766", "23/01/1980", user1)
         Dim invest5 As New Investigador("evaluador ", "2", "ev2@gmail.com", "36712389", "13/03/1994", user2)
         Dim invest6 As New Investigador("evaluador ", "3", "ev3@gmail.com", "38119000", "12/08/1995", user3)
@@ -148,6 +150,7 @@
         str = ""
         Me.llenarGridAutores(aux)
 
+        gestor.seleccionado = aux
         lbl_datos_TI.Text = "Palabras clave: " + aux.palabraClave + vbCrLf + "Estado: " + aux.historialEstado.estado.nombre + vbCrLf + "Resumen: " + aux.resumen + vbCrLf '+ str'
         habilitarBotonDescargarPDF()
         habilitarOpcionVisualizarDatosProcAutor()
@@ -230,7 +233,7 @@
     End Sub
     ' tomarSeleccionVisualizarDatosProcAutor() mismo metodo que click en el boton  datos en el autor 
 
-    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs)
+    Private Sub btn_datos_autor_Click(sender As Object, e As EventArgs) Handles btn_datos_autor.Click
 
         mostrarDatosProcAutor()
 
@@ -248,14 +251,14 @@
 
         For Each aux As Autor In listita
 
-            With aux.conocerInvestigador
-                str += ("Autor: " + .grupoInvestigacion.nombre + " Grupo Investigacion: " + .grupoinv.nombre + " Centro Investigacion: " + .grupoinv.centroInve.nombre + " Facultad: " + .grupoinv.centroInve.facultad.nombre + " Universidad: " + .grupoinv.centroInve.facultad.univ.nombre + vbCrLf)
+            With aux.conocerInvestigador()
+                str += ("Autor: " + .grupoinv.nombre + " Grupo Investigacion: " + .grupoinv.nombre + " Centro Investigacion: " + .grupoinv.centroInve.nombre + " Facultad: " + .grupoinv.centroInve.facultad.nombre + " Universidad: " + .grupoinv.centroInve.facultad.univ.nombre + vbCrLf)
             End With
 
         Next
 
 
-        MsgBox(str, "Aviso", MessageBoxButtons.OK)
+        MsgBox(str, MessageBoxButtons.OK, "Aviso")
     End Sub
 
 
@@ -272,7 +275,7 @@
 
             End With
         Next
-
+        'dgv_evaluacion.Rows.Item(dgv_evaluacion.Rows.Count - 1).Visible = False
     End Sub
 
     Private Sub solicitarIngresoPuntajeYComentario()
@@ -311,7 +314,7 @@
     End Sub
 
     Private Sub solicitarConfirmacionDeEvaluacion()
-        Dim resultado As Integer = MsgBox("confirmar registro de evaluacion", MsgBoxStyle.OkCancel, "Confirmacion")
+        Dim resultado As Integer = MsgBox("Confirmar registro de evaluacion", MsgBoxStyle.OkCancel, "Confirmacion")
         If resultado = DialogResult.OK Then
             'carga todos los datos al TI Hardcodeado
             tomarSeleccionDecisionGlobal()
@@ -336,21 +339,6 @@
     End Sub
 
     Private Sub tomarSeleccionVisualizacionConstancia()
-
-    End Sub
-
-
-
-    Private Sub dgv_evaluacion_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgv_evaluacion.CellContentDoubleClick
-
-
-        'NO SE COMO SETEAR EL VALOR DEL DGV AL PUNTAJEEE
-
-
-        dgv_evaluacion.CurrentRow.Cells.Item("col_puntaje").Value = "5656"
-
-
-
 
     End Sub
 
@@ -382,11 +370,5 @@
 
     End Sub
 
-    Private Sub btn_datos_autor_Click_1(sender As Object, e As EventArgs) Handles btn_datos_autor.Click
-        mostrarDatosProcAutor()
-    End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
 End Class
