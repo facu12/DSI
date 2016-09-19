@@ -9,24 +9,19 @@
         nombre = nom
     End Sub
 
-    Public Function esPendienteDePrimeraEvaluacion()
-        Dim ban As Boolean
-        ban = False
+    Public Function esPendienteDePrimeraEvaluacion() As Boolean
         If nombre = "PendienteDePrimeraEvaluacion" Then
-            ban = True
+            Return True
         Else
-            ban = False
+            Return False
         End If
-        Return ban
+
     End Function
-    Public Function esEvaluacionInicial()
-        Dim ban As Boolean
-        ban = False
+    Public Function esEvaluacionInicial() As Boolean
         If nombre = "EvaluacionInicial" Then
-            ban = True
+            Return True
         Else
-            ban = False
+            Return False
         End If
-        Return ban
     End Function
 End Class

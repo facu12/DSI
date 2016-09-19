@@ -149,14 +149,14 @@
         Dim str As String
         str = ""
         Me.llenarGridAutores(aux)
-
+        ti = aux
         gestor.seleccionado = aux
         lbl_datos_TI.Text = "Palabras clave: " + aux.palabraClave + vbCrLf + "Estado: " + aux.historialEstado.estado.nombre + vbCrLf + "Resumen: " + aux.resumen + vbCrLf '+ str'
         habilitarBotonDescargarPDF()
         habilitarOpcionVisualizarDatosProcAutor()
         dgv_evaluacion.Visible = True
         mostarAspectosAEvaluar()
-
+        solicitarDecisionGlobal()
 
 
 
@@ -174,23 +174,7 @@
 
     'crea un string con todos los ti's devueltos por el gestor 
 
-    Private Function mostrarCabeceraTrabajosdeDeinvestigacion(edSimp As EdicionSimposio, TIs As List(Of TrabajodeInvestigacion))
 
-        Dim listTIS As List(Of TrabajodeInvestigacion)
-        listTIS = gestor.obtenerTIs(edSimp, TIs)
-        Dim str As String
-        str = ""
-
-        For Each x As TrabajodeInvestigacion In listTIS
-
-            str += " " + x.nroOrden.ToString + " " + x.titulo.ToString + " " + x.palabraClave.ToString + " " + x.resumen.ToString + vbCrLf 'salto de linea 
-
-
-
-        Next
-
-        Return str
-    End Function
 
 
     'dimensiona un Ti a partir de la seleccion (click) en dgv_ti's
@@ -275,28 +259,35 @@
 
             End With
         Next
-        dgv_evaluacion.Rows.Item(dgv_evaluacion.Rows.Count - 1).ReadOnly = True
+        dgv_evaluacion.Rows.Item(dgv_evaluacion.Rows.Count - 1).ReadOnly = True 'no dejamos que se pueda editar la ultima fila'
+        'sino se pueden agregar n filas al grid ya que es editable por defecto'
     End Sub
 
     Private Sub solicitarIngresoPuntajeYComentario()
 
     End Sub
 
-    Private Sub tomarIngresoPuntaje()
-        If Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) > 0 And Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value) < 5 Then
-            ti.asigEva.conocerEvaluacion().puntajeAsignado = Convert.ToInt32(dgv_evaluacion.SelectedCells.Item("col_puntaje").Value)
+    Private Function tomarIngresoPuntaje() As Integer
+        Dim puntaje As Integer = Convert.ToInt32(dgv_evaluacion.CurrentRow.Cells.Item("col_puntaje").Value)
+        If puntaje > 0 And puntaje < 6 Then
+            ti.asigEva.conocerEvaluacion().First.puntajeAsignado = puntaje
+            Return 1
         Else
             MsgBox("ingrese un puntaje entre 1 y 5 Valor entero", MsgBoxStyle.OkOnly)
+            Return 0
         End If
-    End Sub
+    End Function
 
-    Private Sub tomarIngresoComentario()
-        If dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString <> "" Then
-            ti.asigEva.conocerEvaluacion.comentario = dgv_evaluacion.SelectedCells.Item("col_comentario").Value.ToString
+    Private Function tomarIngresoComentario() As Integer
+        Dim str = dgv_evaluacion.CurrentRow.Cells.Item("col_comentario").Value.ToString
+        If str <> "" Then
+            ti.asigEva.conocerEvaluacion().First.comentario = str
+            Return 1
         Else
             MsgBox("ingrese un comentario", MsgBoxStyle.OkOnly)
+            Return 0
         End If
-    End Sub
+    End Function
 
     'Carga el combo de decision
     Private Sub solicitarDecisionGlobal()
@@ -308,24 +299,35 @@
     End Sub
 
 
-    Private Sub tomarSeleccionDecisionGlobal()
+    Private Function tomarSeleccionDecisionGlobal() As Integer
         'asigna la decision tomada al TI Hardcodeado
-        ti.asigEva.decisionAceptado = cmb_desicion_global.SelectedItem.value.ToString
-    End Sub
+        If Not cmb_desicion_global.SelectedIndex = -1 Then
+            ti.asigEva.decisionAceptado = cmb_desicion_global.SelectedItem.ToString
+            Return 1
+        Else
+            MsgBox("Seleccione una decision", MsgBoxStyle.OkOnly)
+            Return 0
+        End If
+
+    End Function
 
     Private Sub solicitarConfirmacionDeEvaluacion()
         Dim resultado As Integer = MsgBox("Confirmar registro de evaluacion", MsgBoxStyle.OkCancel, "Confirmacion")
         If resultado = DialogResult.OK Then
             'carga todos los datos al TI Hardcodeado
-            tomarSeleccionDecisionGlobal()
-            tomarIngresoPuntaje()
-            tomarIngresoComentario()
 
+            'validamos que se hayan ingresado correctamente los puntajes, comentarios y la decision global'
+            If tomarIngresoPuntaje() = 0 Or tomarIngresoComentario() = 0 Or tomarSeleccionDecisionGlobal() = 0 Then
+                Return
+            End If
+            ti.asigEva.fechaEvaluacion = Date.Today
+            gestor.seleccionado.asigEva = ti.asigEva
+            gestor.verificarTerceraEvaluacionYEvInicial()
             'pasa a solicitar visualizacion
             solicitarFormaVisualizacionConstancia()
-        Else
-            'no deberia hacer nada. volver al form
-        End If
+            Else
+                'no deberia hacer nada. volver al form
+            End If
     End Sub
 
 
@@ -335,7 +337,9 @@
 
 
     Private Sub solicitarFormaVisualizacionConstancia()
-
+        MsgBox("Forma de visualizacion: Impresion", MsgBoxStyle.YesNo, "Constancia")
+        Dim str As String = gestor.imprimirConstancia()
+        MsgBox(str, MsgBoxStyle.OkOnly, "Constancia") 'Deberia imprimirla'
     End Sub
 
     Private Sub tomarSeleccionVisualizacionConstancia()

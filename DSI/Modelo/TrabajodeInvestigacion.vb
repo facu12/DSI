@@ -4,7 +4,6 @@
     Property resumen As String
     Property titulo As String
     Property historialEstado As HistorialEstado
-    Property estado As Object
     Property evaluadorAsignados As List(Of Evaluador)
     Property asigEva As AsignacionEvaluador
     Property autores As List(Of Autor)
@@ -18,7 +17,7 @@
         resumen = resum
         titulo = tit
         historialEstado = hist
-        estado = est
+        hist.estado = est
         evaluadorAsignados = evasig
         asigEva = asigev
         autores = aut

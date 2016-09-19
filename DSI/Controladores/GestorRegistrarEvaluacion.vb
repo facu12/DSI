@@ -1,18 +1,40 @@
 ﻿Public Class GestorRegistrarEvaluacion
     Property seleccionado As TrabajodeInvestigacion
     Dim vigente As EdicionCongreso
+    Dim constancia As String
 
     Public Sub finCasoDeUso()
 
     End Sub
-    Public Sub imprimirConstancia()
-
-    End Sub
-    Public Function generarConstanciaEvaluacion() As String
-
+    Public Function imprimirConstancia() As String
+        Return constancia
     End Function
-    Public Function verificarTerceraEvaluacionYEvInicial() As Boolean
+    Public Sub generarConstanciaEvaluacion()
+        Dim aux As List(Of Investigador) = New List(Of Investigador)
+        For Each a As Autor In seleccionado.autores
+            aux.Add(a.investigador)
+        Next
 
+        Dim evlogueado As Investigador = obtenerEvaluadorLogueado(aux)
+
+        Dim str As String
+        'cabecera'
+        str = "Nombre y Apellido: " + evlogueado.nombre + evlogueado.apellido + " Fecha de evaluacion: " + seleccionado.asigEva.fechaEvaluacion.ToString + " Simposio: " + seleccionado.simp.nombre + " Numero de orden: " + seleccionado.nroOrden.ToString + vbCrLf 'salto de linea 
+        'cuerpo' 
+        str += "Aspecto: " + seleccionado.asigEva.evaluacion.First.aspectoEv.nombre + " Puntaje: " + seleccionado.asigEva.evaluacion.First.puntajeAsignado.ToString + " Comentario: " + seleccionado.asigEva.evaluacion.First.comentario + vbCrLf
+        'pie'
+        str += "Decision global: " + seleccionado.asigEva.decisionAceptado + " Estado del Trabajo de Investigacion: " + seleccionado.historialEstado.estado.nombre
+
+
+        constancia = str
+    End Sub
+    Public Function verificarTerceraEvaluacionYEvInicial() As Boolean
+        If seleccionado.historialEstado.estado.esEvaluacionInicial() Then
+            'se verifica que sea 3ra evaluacion'
+        Else
+            'codigo si no es evaluacion inicial'
+        End If
+        generarConstanciaEvaluacion()
     End Function
     Public Sub asignarFechaEvaluacion(ByVal fecha As Date)
 

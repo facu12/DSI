@@ -4,7 +4,7 @@
     Property fechaAsignacion As Date
     Property evaluacion As List(Of Evaluacion)
 
-    Public Function conocerEvaluacion()
+    Public Function conocerEvaluacion() As List(Of Evaluacion)
         Return evaluacion
     End Function
 
