@@ -1,48 +1,40 @@
-﻿Public Class EdicionSimposio Implements IAgregado 
-    
+﻿Public MustInherit Class EdicionSimposio
+    Inherits iAgregado
+
     Property cantDiasParaCorrecciones As Integer
     Property fechaFin As Date
     Property fechaInicio As Date
     Property fechaLimitePresTrab As Date
-    Property TrabajoDeInvestigacion[] TIs ;
+    Property TIs As List(Of TrabajodeInvestigacion)
 
 
-    
-    
-    Public buscarTrabajoDeInvestigacion() As List(Of(TrabajoDeInvestigacion)
-    {
-      IIterador  itera = crearIterador(TIs);
-        List <String> aux = New ArrayList();
-        
-        
-        itera.primero();
-   While (!itera.haTerminado()){
-    TrabajoDeInvestigacion ti = (TrabajoDeInvestigacion) itera.actual();
-	
-		If (ti! = null){
-			aux.add("Título de Trabajo de Investigación:" 
-                        +ti.getTitulo() 
-                       + "/n Número de Trabajo de Investigación:" 
-                       + ti.getNroOrden());
-}
-		itera.siguiente(); 
-}
 
-                
-        
-        Return aux ;
-    }
 
-    @Override
-    Public IIterador crearIterador(TrabajoDeInvestigacion[] elementos) 
-    
-{  
-    IIterador iterador = New IteradorTIs(elementos);
-	Return iterador;
-}
-    
-  
-   
-    
+    Public Function buscarTrabajoDeInvestigacion() As List(Of TrabajodeInvestigacion)
 
-    End Class
+        Dim itera As iIterador = crearIterador(TIs)
+        Dim aux As New List(Of TrabajodeInvestigacion)
+        itera.primero()
+        While (itera.haTerminado())
+            Dim ti As Object = itera.actual()
+
+            If ti IsNot Nothing Then
+                aux.Add(ti)
+            End If
+            itera.siguiente()
+        End While
+        Return aux
+    End Function
+
+
+    Public Overrides Function crearIterador(elementos As List(Of TrabajodeInvestigacion)) As iIterador
+
+        Dim iterador As New IteradorTIs(elementos)
+        Return iterador
+    End Function
+
+
+
+
+
+End Class
